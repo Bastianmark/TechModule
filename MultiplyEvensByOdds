@@ -1,0 +1,51 @@
+ using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MultiplyEvensByOdds
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var number = int.Parse(Console.ReadLine());
+            var absNumber = Math.Abs(number);
+            var result = GetMultipleEvenOdds(absNumber);
+            Console.WriteLine(result);
+        }
+
+        static int GetMultipleEvenOdds(int number)
+        {
+            var evenSum = GetSumEvenDigits(number);
+            var oddSum = GetSumOddDigits(number);
+            return evenSum * oddSum;
+        }
+
+        static int GetSumEvenDigits(int number)
+        {
+            return GetSumOfDigits(number, true);
+        }
+
+        static int GetSumOddDigits(int number)
+        {
+            return GetSumOfDigits(number, false);
+        }
+       static int GetSumOfDigits(int number, bool even)
+        {
+            var reminder = even ? 0 : 1;
+            int sum = 0;
+            while (number > 0)
+            {
+                var currentDigit = number % 10;
+                number /= 10;
+                if (currentDigit % 2 == reminder)
+                {
+                    sum += currentDigit;
+                }
+            }
+            return sum;
+        }
+    }
+}
